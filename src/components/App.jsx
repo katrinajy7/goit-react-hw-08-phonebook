@@ -10,7 +10,7 @@ export const App = () => {
         color: '#010101'
       }}
     >
-      React homework template
+      React homework template tadonga kat kay mahal ang tuition
     </div>
   );
 };
