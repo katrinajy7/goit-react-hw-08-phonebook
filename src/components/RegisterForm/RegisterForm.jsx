@@ -39,6 +39,6 @@ export const RegisterForm = () => {
             <button className={css.registerFormBtn} type="submit">
                 Register
             </button>
-        </form>
+        </form>   
     );
 };
