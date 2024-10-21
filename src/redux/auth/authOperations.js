@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://nodejs-homework-template-2.onrender.com';
+axios.defaults.baseURL = 'https://nodejs-homework-template-2.onrender.com/api';
 
 const setAuthHeader = token => {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -13,14 +13,18 @@ const clearAuthHeader = () => {
 
 export const register = createAsyncThunk(
     'auth/register',
-    async({ name, email, password }, thunkAPI) => {
+    async({
+        // name, 
+        email, 
+        password 
+    }, thunkAPI) => {
       try {
         const response = await axios.post('/users/signup', {
-            name,
+            // name,
             email,
             password,
         });
-        setAuthHeader(response.data.token);
+        // setAuthHeader(response.data.token);
         return response.data;       
       }  catch (error) {
         return thunkAPI.rejectWithValue(error.message);
@@ -43,7 +47,8 @@ export const logIn= createAsyncThunk(
 
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     try {
-        await axios.post('/users/logout');
+        // await axios.post('/users/logout');
+        await axios.get('users/logout');
         clearAuthHeader();
     } catch (error) {
         return thunkAPI.rejectWithValue(error.message);

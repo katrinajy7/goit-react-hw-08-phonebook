@@ -94,8 +94,12 @@ import { register, logIn, logOut, refreshUser } from '../../redux/auth/authOpera
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: { name: null, email: null },
-    token: null,
+    user: { 
+      //remove the name field in the user to align with the using mongoDB
+      // name: null, 
+      email: null 
+    },
+      token: null,
     isLoggedIn: false,
     isRefreshing: false,
   },
@@ -103,13 +107,18 @@ const authSlice = createSlice({
     builder
       .addCase(register.fulfilled, (state, action) => {
         state.user = action.payload.user;
+        //remove token state setting in register function to align with mongoDB
+      
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.token = action.payload.token;
-        state.isLoggedIn = true;
+        // state.token = action.payload.token;
+        state.token = null;
+        // state.isLoggedIn = true;
+        state.isLoggedIn = false;
+
       })
       .addCase(logOut.fulfilled, state => {
         state.user = { name: null, email: null };
